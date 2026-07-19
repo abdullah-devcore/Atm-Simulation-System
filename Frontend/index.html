@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NovaBank ATM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-layer">
+  <div class="bg-grid"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="orb orb4"></div>
+</div>
+
+<!-- ====================================================
+     ATM PANEL (Home + Login + Dashboard + Transactions)
+===================================================== -->
+<div class="page-atm active" id="page-atm">
+  <div class="atm-shell">
+
+    <!-- Header -->
+    <div class="atm-header">
+      <div class="logo-wrap" id="header-logo">
+        <div class="logo-mark">
+          <i class="fa-solid fa-landmark"></i>
+          <div class="logo-glow"></div>
+        </div>
+        <div>
+          <div class="logo-name">NovaBank</div>
+          <div class="logo-sub">Digital Banking</div>
+        </div>
+      </div>
+      <!-- Back button shown on sub-screens -->
+      <button class="header-back hidden" id="header-back-btn">
+        <i class="fa-solid fa-arrow-left"></i><span>Back</span>
+      </button>
+      <div class="header-right">
+        <div class="network-badge">
+          <span class="net-dot"></span>
+          <span>LIVE</span>
+        </div>
+        <div class="time-display" id="header-time">--:--</div>
+        <button class="theme-toggle-btn" id="theme-toggle-atm" onclick="toggleTheme()" title="Toggle light/dark mode">
+          <i class="fa-solid fa-moon" id="theme-icon-atm"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Screen -->
+    <div class="atm-screen">
+
+      <!-- HOME -->
+      <div class="screen active" id="screen-home">
+        <div class="screen-pad">
+          <div class="home-hero">
+            <div class="hero-ring">
+              <div class="hero-icon"><i class="fa-solid fa-building-columns"></i></div>
+            </div>
+            <h1 class="hero-title">Welcome to <span class="grad-text">NovaBank</span></h1>
+            <p class="hero-sub">Pakistan's Premier Digital Banking Platform</p>
+          </div>
+
+          <div class="home-actions">
+            <button class="action-card primary-card" onclick="showAtmScreen('screen-login')">
+              <div class="ac-left">
+                <div class="ac-icon-wrap ac-blue"><i class="fa-solid fa-credit-card"></i></div>
+                <div class="ac-info">
+                  <span class="ac-title">Insert Card</span>
+                  <span class="ac-desc">Access your account</span>
+                </div>
+              </div>
+              <div class="ac-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            </button>
+
+            <button class="action-card ghost-card" onclick="openCreatePage()">
+              <div class="ac-left">
+                <div class="ac-icon-wrap ac-violet"><i class="fa-solid fa-user-plus"></i></div>
+                <div class="ac-info">
+                  <span class="ac-title">Create Account</span>
+                  <span class="ac-desc">Open a new account</span>
+                </div>
+              </div>
+              <div class="ac-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            </button>
+          </div>
+
+          <div class="trust-bar">
+            <div class="trust-item"><i class="fa-solid fa-shield-halved"></i><span>Bank-Grade Security</span></div>
+            <div class="trust-sep"></div>
+            <div class="trust-item"><i class="fa-solid fa-bolt"></i><span>Instant Transfers</span></div>
+            <div class="trust-sep"></div>
+            <div class="trust-item"><i class="fa-solid fa-headset"></i><span>24/7 Support</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LOGIN -->
+      <div class="screen" id="screen-login">
+        <div class="screen-pad login-pad">
+          <div class="login-hero">
+            <div class="login-card-graphic">
+              <!-- Holographic shimmer overlay -->
+              <div class="card-holo"></div>
+              <!-- Top row: chip + contactless -->
+              <div class="card-top-row">
+                <div class="card-chip">
+                  <div class="chip-line chip-h1"></div>
+                  <div class="chip-line chip-h2"></div>
+                  <div class="chip-line chip-v1"></div>
+                  <div class="chip-line chip-v2"></div>
+                  <div class="chip-center"></div>
+                </div>
+                <div class="card-contactless">
+                  <i class="fa-solid fa-wifi"></i>
+                </div>
+              </div>
+              <!-- Card number -->
+              <div class="card-number-row">
+                <span class="card-num-group">••••</span>
+                <span class="card-num-group">••••</span>
+                <span class="card-num-group">••••</span>
+                <span class="card-num-group">7823</span>
+              </div>
+              <!-- Bottom row: cardholder + network -->
+              <div class="card-bottom-row">
+                <div class="card-holder-info">
+                  <div class="card-holder-label">Card Holder</div>
+                  <div class="card-holder-name">NovaBank Member</div>
+                </div>
+                <div class="card-expiry-info">
+                  <div class="card-holder-label">Expires</div>
+                  <div class="card-holder-name">12/28</div>
+                </div>
+                <div class="card-network">
+                  <div class="cn-circle cn-left"></div>
+                  <div class="cn-circle cn-right"></div>
+                </div>
+              </div>
+              <!-- Bank name watermark -->
+              <div class="card-bank-name">NovaBank</div>
+            </div>
+            <h2 class="section-title">Insert Card</h2>
+            <p class="section-sub">Authenticate with your CNIC & PIN</p>
+          </div>
+
+          <div class="form-stack">
+            <div class="field-box">
+              <label class="field-label"><i class="fa-solid fa-id-card"></i> CNIC Number</label>
+              <input class="field-input" type="text" id="login-cnic" placeholder="3520112345678" maxlength="13" inputmode="numeric"/>
+              <span class="field-note">Enter your 13-digit CNIC without dashes</span>
+            </div>
+            <div class="field-box">
+              <label class="field-label"><i class="fa-solid fa-lock"></i> ATM PIN</label>
+              <div class="field-pin-wrap">
+                <input class="field-input" type="password" id="login-pin" placeholder="••••" maxlength="4" inputmode="numeric"/>
+                <button class="eye-btn" onclick="togglePin('login-pin',this)" tabindex="-1"><i class="fa-solid fa-eye"></i></button>
+              </div>
+            </div>
+            <div id="login-error" class="alert-error hidden"></div>
+            <button class="submit-btn" onclick="doLogin()">
+              <span>Login to Account</span><i class="fa-solid fa-right-to-bracket"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DASHBOARD (placeholder — real dashboard is page-dashboard full-page) -->
+      <div class="screen" id="screen-dashboard"></div>
+
+      <!-- WITHDRAW -->
+      <div class="screen" id="screen-withdraw">
+        <div class="screen-pad">
+          <h2 class="section-title">Cash Withdrawal</h2>
+          <p class="section-sub">Balance: <strong id="wd-balance" class="bal-inline">–</strong></p>
+
+          <div class="form-stack">
+            <div class="quick-row">
+              <button class="qbtn" onclick="setAmount('wd-amount',1000)">1,000</button>
+              <button class="qbtn" onclick="setAmount('wd-amount',5000)">5,000</button>
+              <button class="qbtn" onclick="setAmount('wd-amount',10000)">10,000</button>
+              <button class="qbtn" onclick="setAmount('wd-amount',20000)">20,000</button>
+            </div>
+            <div class="field-box">
+              <label class="field-label"><i class="fa-solid fa-money-bill-wave"></i> Amount</label>
+              <div class="amount-wrap">
+                <span class="curr-tag">Rs.</span>
+                <input class="field-input amt-input" type="number" id="wd-amount" placeholder="0" min="1"/>
+              </div>
+            </div>
+            <div id="wd-error" class="alert-error hidden"></div>
+            <button class="submit-btn red-btn" onclick="doWithdraw()">
+              <span>Withdraw Cash</span><i class="fa-solid fa-money-bills"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEPOSIT -->
+      <div class="screen" id="screen-deposit">
+        <div class="screen-pad">
+          <h2 class="section-title">Cash Deposit</h2>
+          <p class="section-sub">Balance: <strong id="dep-balance" class="bal-inline">–</strong></p>
+
+          <div class="form-stack">
+            <div class="quick-row">
+              <button class="qbtn" onclick="setAmount('dep-amount',1000)">1,000</button>
+              <button class="qbtn" onclick="setAmount('dep-amount',5000)">5,000</button>
+              <button class="qbtn" onclick="setAmount('dep-amount',10000)">10,000</button>
+              <button class="qbtn" onclick="setAmount('dep-amount',50000)">50,000</button>
+            </div>
+            <div class="field-box">
+              <label class="field-label"><i class="fa-solid fa-money-bill-wave"></i> Amount</label>
+              <div class="amount-wrap">
+                <span class="curr-tag">Rs.</span>
+                <input class="field-input amt-input" type="number" id="dep-amount" placeholder="0" min="1"/>
+              </div>
+            </div>
+            <div id="dep-error" class="alert-error hidden"></div>
+            <button class="submit-btn green-btn" onclick="doDeposit()">
+              <span>Deposit Cash</span><i class="fa-solid fa-arrow-down-to-bracket"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRANSFER -->
+      <div class="screen" id="screen-transfer">
+        <div class="screen-pad">
+          <h2 class="section-title">Funds Transfer</h2>
+          <p class="section-sub">Balance: <strong id="tr-balance" class="bal-inline">–</strong></p>
+
+          <div class="form-stack">
+            <div class="field-box">
+              <label class="field-label"><i class="fa-solid fa-hashtag"></i> Receiver Account</label>
+              <div class="lookup-wrap">
+                <input class="field-input" type="text" id="tr-receiver" placeholder="NVB-9278-XXXX-XXXX"/>
+                <button class="look-btn" onclick="doLookup()"><i class="fa-solid fa-magnifying-glass"></i></button>
+              </div>
+              <div id="tr-receiver-name" class="receiver-badge hidden"></div>
+            </div>
+            <div class="field-box">
+              <label class="field-label"><i class="fa-solid fa-money-bill-wave"></i> Amount</label>
+              <div class="amount-wrap">
+                <span class="curr-tag">Rs.</span>
+                <input class="field-input amt-input" type="number" id="tr-amount" placeholder="0" min="1"/>
+              </div>
+            </div>
+            <div id="tr-error" class="alert-error hidden"></div>
+            <button class="submit-btn violet-btn" onclick="doTransfer()">
+              <span>Send Money</span><i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- HISTORY -->
+      <div class="screen" id="screen-history">
+        <div class="screen-pad scroll-pad">
+          <h2 class="section-title">Mini Statement</h2>
+          <p class="section-sub">Your recent transactions</p>
+          <div id="history-list" class="txn-list"></div>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="screen" id="screen-success">
+        <div class="screen-pad">
+          <div class="success-scene">
+            <div class="success-burst">
+              <div class="burst-ring r1"></div>
+              <div class="burst-ring r2"></div>
+              <div class="burst-icon"><i class="fa-solid fa-circle-check"></i></div>
+            </div>
+            <h2 id="success-title" class="section-title" style="margin-top:20px">Done!</h2>
+            <p id="success-msg" class="section-sub"></p>
+            <div id="success-detail" class="success-chip hidden"></div>
+            <button class="submit-btn" style="margin-top:24px" onclick="showAtmScreen('screen-dashboard')">
+              <span>Back to Dashboard</span><i class="fa-solid fa-house"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /atm-screen -->
+
+    <!-- Footer Rail -->
+    <div class="atm-rail">
+      <div class="rail-card-slot">
+        <div class="rcs-label">
+          <span class="rcs-dot"></span>
+          <span>INSERT CARD HERE</span>
+          <span class="rcs-dot"></span>
+        </div>
+        <div class="rcs-mouth">
+          <div class="rcs-inner">
+            <div class="rcs-scanline"></div>
+          </div>
+          <div class="rcs-neon-left"></div>
+          <div class="rcs-neon-right"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ====================================================
+     CREATE ACCOUNT — FULL-PAGE OVERLAY
+===================================================== -->
+<div class="page-create" id="page-create">
+
+  <!-- Left Panel -->
+  <div class="create-left">
+    <div class="cl-logo">
+      <div class="logo-mark sm"><i class="fa-solid fa-landmark"></i></div>
+      <span>NovaBank</span>
+    </div>
+    <div class="cl-content">
+      <h2 class="cl-title">Open Your<br/>Account Today</h2>
+      <p class="cl-desc">Join millions of Pakistanis banking smarter with NovaBank. Fast, secure, and always available.</p>
+      <div class="cl-perks">
+        <div class="perk-item"><div class="perk-icon"><i class="fa-solid fa-shield-halved"></i></div><div><strong>Bank-Grade Security</strong><p>256-bit encrypted transactions</p></div></div>
+        <div class="perk-item"><div class="perk-icon"><i class="fa-solid fa-bolt"></i></div><div><strong>Instant Transfers</strong><p>Send money in seconds</p></div></div>
+        <div class="perk-item"><div class="perk-icon"><i class="fa-solid fa-chart-line"></i></div><div><strong>Smart Tracking</strong><p>Full transaction history</p></div></div>
+      </div>
+    </div>
+    <div class="cl-footer">
+      <button class="back-to-atm" onclick="closeCreatePage()">
+        <i class="fa-solid fa-arrow-left"></i> Back to ATM
+      </button>
+    </div>
+  </div>
+
+  <!-- Right Panel — Form -->
+  <div class="create-right">
+    <div class="cr-inner">
+      <div class="cr-head">
+        <h3 class="cr-title">Create New Account</h3>
+        <p class="cr-sub">Fill in your details below — all fields are required</p>
+        <div class="step-dots">
+          <span class="sdot active"></span>
+          <span class="sdot"></span>
+          <span class="sdot"></span>
+        </div>
+      </div>
+
+      <div class="create-form-grid">
+        <!-- Row 1 -->
+        <div class="field-box">
+          <label class="field-label"><i class="fa-solid fa-user"></i> Full Name</label>
+          <input class="field-input" type="text" id="c-name" placeholder="e.g. Muhammad Ali"/>
+          <span class="field-note">Each word must start with a capital letter</span>
+        </div>
+        <div class="field-box">
+          <label class="field-label"><i class="fa-solid fa-user-tie"></i> Father's Name</label>
+          <input class="field-input" type="text" id="c-father" placeholder="e.g. Muhammad Akram"/>
+        </div>
+        <!-- Row 2 -->
+        <div class="field-box">
+          <label class="field-label"><i class="fa-solid fa-phone"></i> Phone Number</label>
+          <input class="field-input" type="text" id="c-phone" placeholder="03XXXXXXXXX" maxlength="11" inputmode="numeric"/>
+          <span class="field-note">11 digits starting with 03</span>
+        </div>
+        <div class="field-box">
+          <label class="field-label"><i class="fa-solid fa-id-card"></i> CNIC</label>
+          <input class="field-input" type="text" id="c-cnic" placeholder="3520112345678" maxlength="13" inputmode="numeric"/>
+          <span class="field-note">13 digits, no dashes</span>
+        </div>
+        <!-- Row 3 -->
+        <div class="field-box">
+          <label class="field-label"><i class="fa-solid fa-envelope"></i> Email Address</label>
+          <input class="field-input" type="email" id="c-email" placeholder="you@example.com"/>
+        </div>
+        <div class="field-box">
+          <label class="field-label"><i class="fa-solid fa-city"></i> City</label>
+          <input class="field-input" type="text" id="c-city" placeholder="e.g. Lahore"/>
+        </div>
+        <!-- Row 4 -->
+        <div class="field-box">
+          <label class="field-label"><i class="fa-solid fa-lock"></i> Set ATM PIN</label>
+          <div class="field-pin-wrap">
+            <input class="field-input" type="password" id="c-pin" placeholder="4-digit PIN" maxlength="4" inputmode="numeric"/>
+            <button class="eye-btn" onclick="togglePin('c-pin',this)" tabindex="-1"><i class="fa-solid fa-eye"></i></button>
+          </div>
+          <span class="field-note">Choose a secure 4-digit PIN</span>
+        </div>
+        <div class="field-box">
+          <label class="field-label"><i class="fa-solid fa-money-bill-wave"></i> Initial Deposit</label>
+          <div class="amount-wrap">
+            <span class="curr-tag">Rs.</span>
+            <input class="field-input amt-input" type="number" id="c-deposit" placeholder="Minimum 1" min="1"/>
+          </div>
+        </div>
+      </div>
+
+      <div id="create-error" class="alert-error hidden" style="margin-top:8px"></div>
+
+      <button class="submit-btn create-submit" onclick="doCreate()">
+        <span>Open My Account</span><i class="fa-solid fa-check-circle"></i>
+      </button>
+
+      <p class="cr-tos">By opening an account you agree to NovaBank's Terms &amp; Conditions and Privacy Policy.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ====================================================
+     DASHBOARD — FULL-PAGE BANK DASHBOARD
+===================================================== -->
+<div class="page-dashboard" id="page-dashboard">
+
+  <!-- ── Sidebar ── -->
+  <aside class="db-sidebar">
+
+    <!-- Logo -->
+    <div class="db-sidebar-logo">
+      <div class="logo-mark sm"><i class="fa-solid fa-landmark"></i></div>
+      <span class="db-brand">NovaBank</span>
+    </div>
+
+    <!-- Nav -->
+    <nav class="db-nav">
+      <div class="db-nav-label">MAIN MENU</div>
+      <button class="db-nav-item active" id="nav-overview" onclick="dbShowSection('section-overview','nav-overview','fa-solid fa-house','Overview')">
+        <i class="fa-solid fa-house"></i><span>Overview</span>
+      </button>
+      <button class="db-nav-item" id="nav-withdraw" onclick="dbShowSection('section-withdraw','nav-withdraw','fa-solid fa-money-bill-wave','Cash Withdrawal')">
+        <i class="fa-solid fa-money-bill-wave"></i><span>Cash Withdrawal</span>
+      </button>
+      <button class="db-nav-item" id="nav-deposit" onclick="dbShowSection('section-deposit','nav-deposit','fa-solid fa-piggy-bank','Cash Deposit')">
+        <i class="fa-solid fa-piggy-bank"></i><span>Cash Deposit</span>
+      </button>
+      <button class="db-nav-item" id="nav-transfer" onclick="dbShowSection('section-transfer','nav-transfer','fa-solid fa-paper-plane','Funds Transfer')">
+        <i class="fa-solid fa-paper-plane"></i><span>Funds Transfer</span>
+      </button>
+      <button class="db-nav-item" id="nav-statement" onclick="dbShowSection('section-statement','nav-statement','fa-solid fa-receipt','Mini Statement')">
+        <i class="fa-solid fa-receipt"></i><span>Mini Statement</span>
+      </button>
+    </nav>
+
+    <!-- Spacer -->
+    <div class="db-sidebar-spacer"></div>
+
+    <!-- Eject card / logout -->
+    <div class="db-sidebar-footer">
+      <button class="db-eject-btn" onclick="doLogout()">
+        <i class="fa-solid fa-eject"></i>
+        <div class="db-eject-info">
+          <span class="db-eject-title">Eject Card</span>
+          <span class="db-eject-sub">Sign out safely</span>
+        </div>
+        <i class="fa-solid fa-chevron-right db-eject-arrow"></i>
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- ── Main Content ── -->
+  <main class="db-main">
+
+    <!-- Top navbar -->
+    <header class="db-topnav">
+      <div class="db-topnav-left">
+        <div class="db-page-title" id="db-page-title">
+          <i class="fa-solid fa-house"></i>&nbsp; Overview
+        </div>
+      </div>
+      <div class="db-topnav-right">
+        <div class="network-badge"><span class="net-dot"></span><span>LIVE</span></div>
+        <div class="time-display" id="dash-page-time">--:--</div>
+        <button class="theme-toggle-btn" id="theme-toggle-db" onclick="toggleTheme()" title="Toggle light/dark mode">
+          <i class="fa-solid fa-moon" id="theme-icon-db"></i>
+        </button>
+        <div class="db-user-chip">
+          <div class="db-chip-avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="db-chip-info">
+            <span class="db-chip-name" id="db-chip-name">User</span>
+            <span class="db-chip-accno" id="db-chip-accno">NVB-xxxx</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Overview Section ── -->
+    <section class="db-section active" id="section-overview">
+      <div class="db-overview-grid">
+
+        <!-- Row 1: Welcome bar (full width) -->
+        <div class="db-ov-welcome">
+          <div>
+            <h2 class="db-welcome-title" id="db-welcome-title">Good Morning, User 👋</h2>
+            <p class="db-welcome-sub">Here's your financial summary for today, <span id="db-today-date"></span></p>
+          </div>
+          <div class="db-welcome-badge">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Account Secure</span>
+          </div>
+        </div>
+
+        <!-- Row 2 left: Virtual Bank Card -->
+        <div class="db-vcard">
+          <div class="db-vcard-holo"></div>
+          <div class="db-vcard-bubble db-vcard-bubble-tr"></div>
+          <div class="db-vcard-bubble db-vcard-bubble-bl"></div>
+
+          <!-- Row 1: Bank name | NFC right -->
+          <div class="db-vcard-top">
+            <div class="db-vcard-bank">
+              <i class="fa-solid fa-landmark"></i>
+              <span>NovaBank</span>
+            </div>
+            <div class="db-vcard-nfc"><i class="fa-solid fa-wifi"></i></div>
+          </div>
+
+          <!-- Row 2: Chip left + Account holder name right of chip -->
+          <div class="db-vcard-row2">
+            <!-- Real EMV 6-contact chip -->
+            <div class="db-vcard-chip">
+              <div class="db-chip-body">
+                <div class="db-chip-pad"></div>
+                <div class="db-chip-pad db-chip-pad-center"></div>
+                <div class="db-chip-pad"></div>
+                <div class="db-chip-pad"></div>
+                <div class="db-chip-pad"></div>
+              </div>
+            </div>
+            <div class="db-vcard-holder-inline">
+              <div class="db-vcard-hlabel">Account Holder</div>
+              <div class="db-vcard-hname" id="db-vcard-name">—</div>
+            </div>
+          </div>
+
+          <!-- Balance -->
+          <div class="db-vcard-balance-wrap">
+            <div class="db-vcard-balance-label">Available Balance</div>
+            <div class="db-vcard-balance" id="db-vcard-balance">Rs. 0</div>
+          </div>
+
+          <!-- Bottom: card number LEFT, Mastercard RIGHT -->
+          <div class="db-vcard-bottom">
+            <div class="db-vcard-cardno" id="db-vcard-accno">•••• •••• •••• 7428</div>
+            <div class="db-vcard-mc">
+              <div class="db-mc-circle db-mc-left"></div>
+              <div class="db-mc-circle db-mc-right"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2 right: Account Info Card -->
+        <div class="db-acct-panel">
+          <div class="db-acct-card-bg"></div>
+          <div class="db-acct-card-inner">
+
+            <!-- Top: avatar + name -->
+            <div class="db-acct-top">
+              <div class="db-acct-avatar"><i class="fa-solid fa-user"></i></div>
+              <div>
+                <div class="db-acct-fullname" id="db-ai-name">—</div>
+                <div class="db-acct-type">NovaBank Member</div>
+              </div>
+              <div class="db-acct-badge-live">
+                <span class="db-status-dot"></span> Active
+              </div>
+            </div>
+
+            <!-- Middle: account number -->
+            <div class="db-acct-number-block">
+              <div class="db-acct-num-label">Account Number</div>
+              <div class="db-acct-num" id="db-ai-accno">—</div>
+            </div>
+
+            <!-- Bottom: bank · date -->
+            <div class="db-acct-footer">
+              <div class="db-acct-foot-item">
+                <i class="fa-solid fa-building-columns"></i>
+                <span id="db-ai-bank">NovaBank</span>
+              </div>
+              <div class="db-acct-foot-sep"></div>
+              <div class="db-acct-foot-item">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span id="db-ai-date">—</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Row 3: Quick Actions heading + grid (full width) -->
+        <div class="db-ov-actions">
+          <div class="db-section-heading">
+            <i class="fa-solid fa-bolt"></i> Quick Actions
+          </div>
+          <div class="db-quick-grid">
+
+            <button class="db-quick-card db-qc-red" onclick="dbShowSection('section-withdraw','nav-withdraw','fa-solid fa-money-bill-wave','Cash Withdrawal')">
+              <div class="db-qc-icon-wrap"><i class="fa-solid fa-money-bill-wave"></i></div>
+              <div class="db-qc-label">Cash Withdrawal</div>
+              <div class="db-qc-desc">Withdraw from ATM</div>
+              <div class="db-qc-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            </button>
+
+            <button class="db-quick-card db-qc-green" onclick="dbShowSection('section-deposit','nav-deposit','fa-solid fa-piggy-bank','Cash Deposit')">
+              <div class="db-qc-icon-wrap"><i class="fa-solid fa-piggy-bank"></i></div>
+              <div class="db-qc-label">Cash Deposit</div>
+              <div class="db-qc-desc">Add money to account</div>
+              <div class="db-qc-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            </button>
+
+            <button class="db-quick-card db-qc-violet" onclick="dbShowSection('section-transfer','nav-transfer','fa-solid fa-paper-plane','Funds Transfer')">
+              <div class="db-qc-icon-wrap"><i class="fa-solid fa-paper-plane"></i></div>
+              <div class="db-qc-label">Funds Transfer</div>
+              <div class="db-qc-desc">Send to any account</div>
+              <div class="db-qc-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            </button>
+
+            <button class="db-quick-card db-qc-gold" onclick="dbShowSection('section-statement','nav-statement','fa-solid fa-receipt','Mini Statement')">
+              <div class="db-qc-icon-wrap"><i class="fa-solid fa-receipt"></i></div>
+              <div class="db-qc-label">Mini Statement</div>
+              <div class="db-qc-desc">Full transaction log</div>
+              <div class="db-qc-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            </button>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Cash Withdrawal Section ── -->
+    <section class="db-section" id="section-withdraw">
+      <div class="db-page-layout">
+
+        <!-- Left info panel -->
+        <div class="db-page-left db-pl-red">
+          <div class="db-pl-icon"><i class="fa-solid fa-money-bill-wave"></i></div>
+          <h2 class="db-pl-title">Cash Withdrawal</h2>
+          <p class="db-pl-desc">Securely withdraw cash from your NovaBank account. Your transaction is encrypted end-to-end.</p>
+          <div class="db-pl-balance-card">
+            <div class="db-pl-bal-label"><i class="fa-solid fa-wallet"></i> Available Balance</div>
+            <div class="db-pl-bal-amount" id="db-wd-balance">—</div>
+            <div class="db-pl-bal-note"><i class="fa-solid fa-circle-check"></i> Account Active</div>
+          </div>
+          <div class="db-pl-tips">
+            <div class="db-pl-tip"><i class="fa-solid fa-circle-info"></i><span>Daily limit applies to all withdrawals</span></div>
+            <div class="db-pl-tip"><i class="fa-solid fa-shield-halved"></i><span>All transactions are fully secured</span></div>
+          </div>
+        </div>
+
+        <!-- Right form panel -->
+        <div class="db-page-right">
+          <div class="db-pr-head">
+            <div class="db-pr-step"><span>1</span> Enter Amount</div>
+            <div class="db-pr-subtitle">Select a preset or type a custom amount below</div>
+          </div>
+
+          <div class="db-preset-grid">
+            <button class="db-preset-btn" onclick="dbSetAndHighlight('db-wd-amount',1000,this)">
+              <span class="db-preset-rs">Rs.</span><span class="db-preset-val">1,000</span>
+            </button>
+            <button class="db-preset-btn" onclick="dbSetAndHighlight('db-wd-amount',5000,this)">
+              <span class="db-preset-rs">Rs.</span><span class="db-preset-val">5,000</span>
+            </button>
+            <button class="db-preset-btn" onclick="dbSetAndHighlight('db-wd-amount',10000,this)">
+              <span class="db-preset-rs">Rs.</span><span class="db-preset-val">10,000</span>
+            </button>
+            <button class="db-preset-btn" onclick="dbSetAndHighlight('db-wd-amount',20000,this)">
+              <span class="db-preset-rs">Rs.</span><span class="db-preset-val">20,000</span>
+            </button>
+            <button class="db-preset-btn" onclick="dbSetAndHighlight('db-wd-amount',50000,this)">
+              <span class="db-preset-rs">Rs.</span><span class="db-preset-val">50,000</span>
+            </button>
+            <button class="db-preset-btn" onclick="dbSetAndHighlight('db-wd-amount',100000,this)">
+              <span class="db-preset-rs">Rs.</span><span class="db-preset-val">1,00,000</span>
+            </button>
+          </div>
+
+          <div class="db-amount-field-wrap">
+            <div class="db-af-label">Or enter custom amount</div>
+            <div class="db-amount-input-row">
+              <div class="db-currency-tag">Rs.</div>
+              <input class="db-amount-input" type="number" id="db-wd-amount" placeholder="0" min="1" oninput="dbClearPresets(this.closest('.db-page-right'))"/>
+            </div>
+          </div>
+
+          <div id="db-wd-error" class="alert-error hidden"></div>
+
+          <button class="db-submit-btn db-submit-red" onclick="dbDoWithdraw()">
+            <i class="fa-solid fa-money-bill-wave"></i>
+            <span>Withdraw Cash</span>
+            <i class="fa-solid fa-chevron-right db-submit-arrow"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Cash Deposit Section ── -->
+    <section class="db-section" id="section-deposit">
+      <div class="db-page-layout">
+
+        <div class="db-page-left db-pl-green">
+          <div class="db-pl-icon"><i class="fa-solid fa-piggy-bank"></i></div>
+          <h2 class="db-pl-title">Cash Deposit</h2>
+          <p class="db-pl-desc">Add funds to your NovaBank account instantly. Deposits are reflected in real time.</p>
+          <div class="db-pl-balance-card">
+            <div class="db-pl-bal-label"><i class="fa-solid fa-wallet"></i> Available Balance</div>
+            <div class="db-pl-bal-amount" id="db-dep-balance">—</div>
+            <div class="db-pl-bal-note"><i class="fa-solid fa-circle-check"></i> Account Active</div>
+          </div>
+          <div class="db-pl-tips">
+            <div class="db-pl-tip"><i class="fa-solid fa-circle-info"></i><span>No minimum deposit required</span></div>
+            <div class="db-pl-tip"><i class="fa-solid fa-bolt"></i><span>Balance updates immediately</span></div>
+          </div>
+        </div>
+
+        <div class="db-page-right">
+          <div class="db-pr-head">
+            <div class="db-pr-step db-pr-step-green"><span>1</span> Enter Amount</div>
+            <div class="db-pr-subtitle">Select a preset or type a custom amount below</div>
+          </div>
+
+          <div class="db-preset-grid">
+            <button class="db-preset-btn" onclick="dbSetAndHighlight('db-dep-amount',1000,this)">
+              <span class="db-preset-rs">Rs.</span><span class="db-preset-val">1,000</span>
+            </button>
+            <button class="db-preset-btn" onclick="dbSetAndHighlight('db-dep-amount',5000,this)">
+              <span class="db-preset-rs">Rs.</span><span class="db-preset-val">5,000</span>
+            </button>
+            <button class="db-preset-btn" onclick="dbSetAndHighlight('db-dep-amount',10000,this)">
+              <span class="db-preset-rs">Rs.</span><span class="db-preset-val">10,000</span>
+            </button>
+            <button class="db-preset-btn" onclick="dbSetAndHighlight('db-dep-amount',25000,this)">
+              <span class="db-preset-rs">Rs.</span><span class="db-preset-val">25,000</span>
+            </button>
+            <button class="db-preset-btn" onclick="dbSetAndHighlight('db-dep-amount',50000,this)">
+              <span class="db-preset-rs">Rs.</span><span class="db-preset-val">50,000</span>
+            </button>
+            <button class="db-preset-btn" onclick="dbSetAndHighlight('db-dep-amount',100000,this)">
+              <span class="db-preset-rs">Rs.</span><span class="db-preset-val">1,00,000</span>
+            </button>
+          </div>
+
+          <div class="db-amount-field-wrap">
+            <div class="db-af-label">Or enter custom amount</div>
+            <div class="db-amount-input-row">
+              <div class="db-currency-tag">Rs.</div>
+              <input class="db-amount-input" type="number" id="db-dep-amount" placeholder="0" min="1" oninput="dbClearPresets(this.closest('.db-page-right'))"/>
+            </div>
+          </div>
+
+          <div id="db-dep-error" class="alert-error hidden"></div>
+
+          <button class="db-submit-btn db-submit-green" onclick="dbDoDeposit()">
+            <i class="fa-solid fa-piggy-bank"></i>
+            <span>Deposit Cash</span>
+            <i class="fa-solid fa-chevron-right db-submit-arrow"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Funds Transfer Section ── -->
+    <section class="db-section" id="section-transfer">
+      <div class="db-page-layout">
+
+        <div class="db-page-left db-pl-violet">
+          <div class="db-pl-icon"><i class="fa-solid fa-paper-plane"></i></div>
+          <h2 class="db-pl-title">Funds Transfer</h2>
+          <p class="db-pl-desc">Send money instantly to any NovaBank account. Transfers are processed in real time.</p>
+          <div class="db-pl-balance-card">
+            <div class="db-pl-bal-label"><i class="fa-solid fa-wallet"></i> Available Balance</div>
+            <div class="db-pl-bal-amount" id="db-tr-balance">—</div>
+            <div class="db-pl-bal-note"><i class="fa-solid fa-circle-check"></i> Account Active</div>
+          </div>
+          <div class="db-pl-tips">
+            <div class="db-pl-tip"><i class="fa-solid fa-magnifying-glass"></i><span>Look up receiver before sending</span></div>
+            <div class="db-pl-tip"><i class="fa-solid fa-shield-halved"></i><span>Double-check account number</span></div>
+          </div>
+        </div>
+
+        <div class="db-page-right">
+          <div class="db-pr-head">
+            <div class="db-pr-step db-pr-step-violet"><span>1</span> Receiver Details</div>
+            <div class="db-pr-subtitle">Enter the account number and verify before sending</div>
+          </div>
+
+          <div class="db-tr-lookup-block">
+            <div class="db-af-label"><i class="fa-solid fa-hashtag"></i> Receiver Account Number</div>
+            <div class="db-tr-lookup-row">
+              <input class="db-amount-input db-tr-input" type="text" id="db-tr-receiver" placeholder="NVB-9278-XXXX-XXXX"/>
+              <button class="db-lookup-btn" onclick="dbDoLookup()">
+                <i class="fa-solid fa-magnifying-glass"></i> Verify
+              </button>
+            </div>
+            <div id="db-tr-receiver-name" class="db-verified-badge hidden">
+              <i class="fa-solid fa-circle-check"></i>
+              <span id="db-tr-receiver-label">—</span>
+            </div>
+          </div>
+
+          <div class="db-tr-divider"><span>Then enter amount</span></div>
+
+          <div class="db-pr-head" style="margin-bottom:10px">
+            <div class="db-pr-step db-pr-step-violet"><span>2</span> Transfer Amount</div>
+          </div>
+
+          <div class="db-amount-field-wrap" style="margin-top:0">
+            <div class="db-amount-input-row">
+              <div class="db-currency-tag">Rs.</div>
+              <input class="db-amount-input" type="number" id="db-tr-amount" placeholder="0" min="1"/>
+            </div>
+          </div>
+
+          <div id="db-tr-error" class="alert-error hidden"></div>
+
+          <button class="db-submit-btn db-submit-violet" onclick="dbDoTransfer()">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>Send Money</span>
+            <i class="fa-solid fa-chevron-right db-submit-arrow"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Mini Statement Section ── -->
+    <section class="db-section" id="section-statement">
+      <div class="db-page-layout db-page-layout-stmt">
+
+        <div class="db-page-left db-pl-gold">
+          <div class="db-pl-icon"><i class="fa-solid fa-receipt"></i></div>
+          <h2 class="db-pl-title">Mini Statement</h2>
+          <p class="db-pl-desc">A complete record of all your account transactions in chronological order.</p>
+          <div class="db-stmt-summary">
+            <div class="db-ss-row">
+              <div class="db-ss-icon t-green"><i class="fa-solid fa-plus"></i></div>
+              <div><div class="db-ss-label">Credits</div><div class="db-ss-val" id="db-stmt-credits">—</div></div>
+            </div>
+            <div class="db-ss-row">
+              <div class="db-ss-icon t-red"><i class="fa-solid fa-minus"></i></div>
+              <div><div class="db-ss-label">Debits</div><div class="db-ss-val" id="db-stmt-debits">—</div></div>
+            </div>
+            <div class="db-ss-row">
+              <div class="db-ss-icon t-violet"><i class="fa-solid fa-paper-plane"></i></div>
+              <div><div class="db-ss-label">Transfers</div><div class="db-ss-val" id="db-stmt-transfers">—</div></div>
+            </div>
+          </div>
+          <button class="db-refresh-btn" style="margin-top:auto" onclick="dbLoadStatement()">
+            <i class="fa-solid fa-rotate-right"></i> Refresh
+          </button>
+        </div>
+
+        <div class="db-page-right db-page-right-stmt">
+          <div class="db-stmt-header-row">
+            <div class="db-pr-step db-pr-step-gold"><span><i class="fa-solid fa-list"></i></span> Transaction History</div>
+            <div class="db-stmt-count-badge"><span id="db-stmt-count">—</span></div>
+          </div>
+          <div id="db-stmt-list" class="db-stmt-scroll">
+            <div class="txn-empty">
+              <div class="loader-ring" style="width:30px;height:30px;border-width:3px;margin:0 auto 12px"></div>
+              <p>Loading transactions…</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Success Section ── -->
+    <section class="db-section" id="section-success">
+      <div class="db-success-fullpage">
+        <div class="success-burst" style="width:110px;height:110px">
+          <div class="burst-ring r1"></div>
+          <div class="burst-ring r2"></div>
+          <div class="burst-icon" style="font-size:56px"><i class="fa-solid fa-circle-check"></i></div>
+        </div>
+        <h2 id="db-success-title" class="db-suc-title">Transaction Complete</h2>
+        <p id="db-success-msg" class="db-suc-msg"></p>
+        <div id="db-success-detail" class="db-suc-detail hidden"></div>
+        <button class="db-submit-btn db-submit-indigo db-suc-btn"
+          onclick="dbShowSection('section-overview','nav-overview','fa-solid fa-house','Overview');loadDashboardPage();">
+          <i class="fa-solid fa-house"></i>
+          <span>Back to Overview</span>
+          <i class="fa-solid fa-chevron-right db-submit-arrow"></i>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+<!-- Loading Overlay -->
+<div class="overlay-loading hidden" id="loading-overlay">
+  <div class="loader-box">
+    <div class="loader-ring"></div>
+    <p>Processing...</p>
+  </div>
+</div>
+
+<!-- Account Created Modal -->
+<div class="overlay-loading hidden" id="acc-created-modal">
+  <div class="created-box">
+    <div class="cb-burst">
+      <div class="burst-ring r1 gold-ring"></div>
+      <div class="burst-ring r2 gold-ring"></div>
+      <div class="cb-icon"><i class="fa-solid fa-star"></i></div>
+    </div>
+    <h3>Account Created!</h3>
+    <p>Welcome to NovaBank. Your account number:</p>
+    <div class="cb-accno" id="modal-acc-no">NVB-9278-XXXX-XXXX</div>
+    <p class="cb-hint"><i class="fa-solid fa-triangle-exclamation"></i> Save this number — you need it for transfers</p>
+    <button class="submit-btn" onclick="closeAccModal()">
+      <span>Go to Home</span><i class="fa-solid fa-house"></i>
+    </button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
